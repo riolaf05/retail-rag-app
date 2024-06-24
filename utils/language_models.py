@@ -384,6 +384,9 @@ class LangChainAI:
             print(cb)
 
     def create_documents(self, texts, metadata={"source": "python"}):
+        '''
+        Turns text into collection of documents adding metadata
+        '''
         docs=[]
         for text in texts:
             doc = Document(
@@ -392,3 +395,15 @@ class LangChainAI:
             )
             docs.append(doc)
         return docs
+    
+    def add_metadata(self, docs, metadata={"source": "python"}):
+        '''
+        Adds metadata to already existing documents collection
+        '''
+        new_docs=[]
+        for doc in docs:
+            new_docs.append(Document(
+                page_content=doc.page_content,
+                metadata=metadata,
+            ))
+        return new_docs
